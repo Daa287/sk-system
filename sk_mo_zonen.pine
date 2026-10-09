@@ -1,0 +1,66 @@
+//@version=6
+// SK-System · Mo-Zonen (sk_mo 1.1.0) · Stand 09.10.2026 13:33 · Kurs 82'752
+// Feste Werte vom SK-Server - bei Aenderungen neu von der Webseite kopieren. Keine Anlageberatung.
+indicator("SK Mo-Zonen 09.10.2026 13:33", overlay = true, max_boxes_count = 100, max_lines_count = 100, max_labels_count = 100)
+showLong  = input.bool(true, "Long-Zonen")
+showShort = input.bool(true, "Short-Zonen (nur Beobachtung)")
+showZiel  = input.bool(true, "Offene Ziele 161,8-200 %")
+showDV    = input.bool(true, "Doppelter Vorteil")
+showFibo  = input.bool(true, "Fibo-Welle")
+showD1    = input.bool(true, "D1 SMA50 / EMA50 (live)")
+links     = input.int(80, "Kaesten: Kerzen nach links", minval = 5, maxval = 400)
+rechts    = input.int(25, "Kaesten: Kerzen nach rechts", minval = 0, maxval = 400)
+
+f_zone(float lo, float hi, color c, int tr, string t) =>
+    box.new(bar_index - links, hi, bar_index + rechts, lo, border_color = c, bgcolor = color.new(c, tr), text = t, text_size = size.small, text_color = c, text_halign = text.align_left, text_valign = text.align_top)
+f_line(float y, color c, string t) =>
+    line.new(bar_index - links, y, bar_index + rechts, y, color = c, style = line.style_dashed)
+    label.new(bar_index + rechts, y, t, style = label.style_label_left, color = color.new(c, 100), textcolor = c, size = size.small)
+
+d1sma = request.security(syminfo.tickerid, "D", ta.sma(close, 50)[1], lookahead = barmerge.lookahead_on)
+d1ema = request.security(syminfo.tickerid, "D", ta.ema(close, 50)[1], lookahead = barmerge.lookahead_on)
+plot(showD1 ? d1sma : na, "D1 SMA50", color = color.new(color.blue, 0), linewidth = 2)
+plot(showD1 ? d1ema : na, "D1 EMA50", color = color.new(color.purple, 0), linewidth = 2)
+
+var table tb = table.new(position.top_right, 1, 1)
+if barstate.islastconfirmedhistory
+    table.cell(tb, 0, 0, "SK Mo-Zonen · Stand 09.10.2026 13:33 · Kurs 82'752", text_color = color.gray, text_size = size.small)
+    if showLong
+        f_zone(67740.66, 82377.32, color.teal, 82, "LONG 67'741-82'377 | W1/D1/H4 GK Z 38'555 A 73'777 B 49'000")
+        f_line(57310.95, color.teal, "SL 78,6 % 57'311")
+    if showShort
+        f_zone(83806.78, 84946.80, color.red, 82, "SHORT 83'807-84'947 | D1/H4/15m BC Z 87'396 A 82'563 B 87'220 + H4/15m GK Z 87'220 A 83'888 B 86'999")
+        f_line(85759.14, color.red, "SL 78,6 % 85'759")
+        if showZiel
+            f_zone(77554.66, 79400.74, color.orange, 88, "Ziel SHORT 161,8-200 % 77'555-79'401")
+    if showLong
+        f_zone(70640.18, 74835.33, color.teal, 82, "LONG 70'640-74'835 | D1/H4 GK Z 62'275 A 65'474 B 62'535")
+        f_line(67650.82, color.teal, "SL 78,6 % 67'651")
+    if showLong
+        f_zone(67655.48, 72597.93, color.teal, 82, "LONG 67'655-72'598 | D1/H4 GK Z 57'800 A 66'956 B 62'275")
+        f_line(64133.62, color.teal, "SL 78,6 % 64'134")
+    if showShort
+        f_zone(83696.33, 84799.46, color.red, 82, "SHORT 83'696-84'799 | H4/15m GK Z 86'999 A 84'972 B 86'699")
+        f_line(85585.52, color.red, "SL 78,6 % 85'586")
+    if showShort
+        f_zone(82824.28, 83636.14, color.red, 82, "SHORT 82'824-83'636 | 15m BC Z 87'396 A 82'875 B 85'255")
+        f_line(84214.65, color.red, "SL 78,6 % 84'215")
+        if showZiel
+            f_zone(76213.52, 77940.44, color.orange, 88, "Ziel SHORT 161,8-200 % 76'214-77'940")
+    if showShort
+        f_zone(82037.74, 82586.89, color.red, 82, "SHORT 82'038-82'587 | 15m GK Z 83'682 A 83'062 B 83'606")
+        f_line(82978.20, color.red, "SL 78,6 % 82'978")
+    if showDV
+        f_zone(77554.66, 79400.74, color.lime, 70, "Doppelter Vorteil LONG 77'555-79'401")
+    if showDV
+        f_zone(76213.52, 77940.44, color.lime, 70, "Doppelter Vorteil LONG 76'214-77'940")
+    if showFibo
+        f_line(81181.82, color.gray, "Fibo LONG 74'968>87'396 50 % 81'182")
+        f_line(79715.35, color.gray, "Fibo LONG 74'968>87'396 61,8 % 79'715")
+        f_line(79106.39, color.gray, "Fibo LONG 74'968>87'396 66,7 % 79'106")
+        f_line(77627.50, color.gray, "Fibo LONG 74'968>87'396 78,6 % 77'627")
+    if showFibo
+        f_line(83894.61, color.gray, "Fibo SHORT 87'396>80'394 50 % 83'895")
+        f_line(84720.86, color.gray, "Fibo SHORT 87'396>80'394 61,8 % 84'721")
+        f_line(85063.97, color.gray, "Fibo SHORT 87'396>80'394 66,7 % 85'064")
+        f_line(85897.22, color.gray, "Fibo SHORT 87'396>80'394 78,6 % 85'897")
