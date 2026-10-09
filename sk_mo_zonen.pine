@@ -1,8 +1,8 @@
 //@version=6
-// SK-System · Mo-Zonen (sk_mo 1.3.2) · Stand 09.10.2026 15:09 · Kurs 83'168
+// SK-System · Mo-Zonen (sk_mo 1.3.2) · Stand 09.10.2026 16:09 · Kurs 82'867
 // Feste Werte vom SK-Server - bei Aenderungen neu von der Webseite kopieren. Keine Anlageberatung.
 // Details zu jeder Zone: Maus auf die Beschriftung rechts neben dem Kasten.
-indicator("SK Mo-Zonen 09.10.2026 15:09", overlay = true, max_boxes_count = 100, max_lines_count = 100, max_labels_count = 100)
+indicator("SK Mo-Zonen 09.10.2026 16:09", overlay = true, max_boxes_count = 100, max_lines_count = 100, max_labels_count = 100)
 showLong  = input.bool(true, "Long-Zonen", group = "Anzeige")
 showShort = input.bool(true, "Short-Zonen (nur Beobachtung)", group = "Anzeige")
 showZiel  = input.bool(true, "Offene Ziele 161,8-200 %", group = "Anzeige")
@@ -49,17 +49,17 @@ plot(showD1 ? d1sma : na, "D1 SMA50", color = color.new(color.blue, 0), linewidt
 plot(showD1 ? d1ema : na, "D1 EMA50", color = color.new(color.purple, 0), linewidth = 2)
 
 if barstate.islastconfirmedhistory
-    if showLong and (zD1 or zH4) and 5.9 <= maxH
+    if showLong and (zD1 or zH4) and 6.0 <= maxH
         f_zone(67655.48, 72597.93, color.teal, 82)
         f_tag(70126.71, color.teal, "LONG 67'655-72'598 · D1/H4", "D1/H4 Gesamtkorrektur: Z 57'800 A 66'956 B 62'275 C 87'396 · Zone 67'655-72'598 · SL 64'134")
         if showSL
             f_sl(64133.62, color.teal, "SL 64'134")
-    if showLong and (zW1 or zD1 or zH4) and 17.6 <= maxH
+    if showLong and (zW1 or zD1 or zH4) and 17.7 <= maxH
         f_zone(67740.66, 82377.32, color.teal, 82)
         f_tag(75058.99, color.teal, "LONG 67'741-82'377 · W1/D1/H4", "W1/D1/H4 Gesamtkorrektur: Z 38'555 A 73'777 B 49'000 C 126'200 · Zone 67'741-82'377 · SL 57'311")
         if showSL
             f_sl(57310.95, color.teal, "SL 57'311")
-    if showLong and (zD1 or zH4) and 5.0 <= maxH
+    if showLong and (zD1 or zH4) and 5.1 <= maxH
         f_zone(70640.18, 74835.33, color.teal, 82)
         f_tag(72737.76, color.teal, "LONG 70'640-74'835 · D1/H4", "D1/H4 Gesamtkorrektur: Z 62'275 A 65'474 B 62'535 C 87'396 · Zone 70'640-74'835 · SL 67'651")
         if showSL
@@ -98,7 +98,7 @@ if barstate.islastconfirmedhistory
 
 var table dash = table.new(dashPos == "oben rechts" ? position.top_right : dashPos == "unten rechts" ? position.bottom_right : dashPos == "oben links" ? position.top_left : position.bottom_left, 5, 10, bgcolor = dashBg, border_width = 0, frame_width = 1, frame_color = color.new(color.gray, 70))
 if barstate.islast and showDash
-    table.cell(dash, 0, 0, "SK 09.10. 15:09", text_color = color.gray, text_size = ts)
+    table.cell(dash, 0, 0, "SK 09.10. 16:09", text_color = color.gray, text_size = ts)
     table.cell(dash, 1, 0, "Zone", text_color = color.gray, text_size = ts)
     table.cell(dash, 2, 0, "TF", text_color = color.gray, text_size = ts)
     table.cell(dash, 3, 0, "SL", text_color = color.gray, text_size = ts)
@@ -126,7 +126,7 @@ if barstate.islast and showDash
         table.cell(dash, 3, r, "82'978", text_color = color.gray, text_size = ts)
         table.cell(dash, 4, r, f_stat(82037.74, 82586.89), text_color = color.white, text_size = ts, bgcolor = f_in(82037.74, 82586.89) ? color.new(color.red, 45) : na)
         r += 1
-    if showLong and (zW1 or zD1 or zH4) and 17.6 <= maxH
+    if showLong and (zW1 or zD1 or zH4) and 17.7 <= maxH
         table.cell(dash, 0, r, "L", text_color = color.teal, text_size = ts, text_halign = text.align_left)
         table.cell(dash, 1, r, "67'741–82'377", text_color = color.white, text_size = ts)
         table.cell(dash, 2, r, "W1/D1/H4", text_color = color.gray, text_size = ts)
