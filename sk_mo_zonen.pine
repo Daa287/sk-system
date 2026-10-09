@@ -1,21 +1,33 @@
 //@version=6
-// SK-System · Mo-Zonen (sk_mo 1.1.0) · Stand 09.10.2026 13:33 · Kurs 82'752
+// SK-System · Mo-Zonen (sk_mo 1.2.0) · Stand 09.10.2026 13:44 · Kurs 82'992
 // Feste Werte vom SK-Server - bei Aenderungen neu von der Webseite kopieren. Keine Anlageberatung.
-indicator("SK Mo-Zonen 09.10.2026 13:33", overlay = true, max_boxes_count = 100, max_lines_count = 100, max_labels_count = 100)
-showLong  = input.bool(true, "Long-Zonen")
-showShort = input.bool(true, "Short-Zonen (nur Beobachtung)")
-showZiel  = input.bool(true, "Offene Ziele 161,8-200 %")
-showDV    = input.bool(true, "Doppelter Vorteil")
-showFibo  = input.bool(true, "Fibo-Welle")
-showD1    = input.bool(true, "D1 SMA50 / EMA50 (live)")
-links     = input.int(80, "Kaesten: Kerzen nach links", minval = 5, maxval = 400)
-rechts    = input.int(25, "Kaesten: Kerzen nach rechts", minval = 0, maxval = 400)
+// Details zu jeder Zone: Maus auf die Beschriftung rechts neben dem Kasten.
+indicator("SK Mo-Zonen 09.10.2026 13:44", overlay = true, max_boxes_count = 100, max_lines_count = 100, max_labels_count = 100)
+showLong  = input.bool(true, "Long-Zonen", group = "Anzeige")
+showShort = input.bool(true, "Short-Zonen (nur Beobachtung)", group = "Anzeige")
+showZiel  = input.bool(true, "Offene Ziele 161,8-200 %", group = "Anzeige")
+showDV    = input.bool(true, "Doppelter Vorteil", group = "Anzeige")
+showSL    = input.bool(true, "SL 78,6 %", group = "Anzeige")
+showFibo  = input.bool(true, "Fibo-Welle", group = "Anzeige")
+showD1    = input.bool(true, "D1 SMA50 / EMA50 (live)", group = "Anzeige")
+zW1 = input.bool(true, "W1", group = "Zeitrahmen der Zonen", inline = "tf")
+zD1 = input.bool(true, "D1", group = "Zeitrahmen der Zonen", inline = "tf")
+zH4 = input.bool(true, "H4", group = "Zeitrahmen der Zonen", inline = "tf")
+z15 = input.bool(true, "15m", group = "Zeitrahmen der Zonen", inline = "tf")
+maxH   = input.float(10, "Max. Zonenhoehe in % vom Kurs", minval = 1, group = "Zeitrahmen der Zonen")
+links  = input.int(80, "Kaesten: Kerzen nach links", minval = 5, maxval = 400, group = "Layout")
+rechts = input.int(25, "Kaesten: Kerzen nach rechts", minval = 5, maxval = 400, group = "Layout")
 
-f_zone(float lo, float hi, color c, int tr, string t) =>
-    box.new(bar_index - links, hi, bar_index + rechts, lo, border_color = c, bgcolor = color.new(c, tr), text = t, text_size = size.small, text_color = c, text_halign = text.align_left, text_valign = text.align_top)
-f_line(float y, color c, string t) =>
-    line.new(bar_index - links, y, bar_index + rechts, y, color = c, style = line.style_dashed)
-    label.new(bar_index + rechts, y, t, style = label.style_label_left, color = color.new(c, 100), textcolor = c, size = size.small)
+f_zone(float lo, float hi, color c, int tr) =>
+    box.new(bar_index - links, hi, bar_index + rechts, lo, border_color = color.new(c, 40), bgcolor = color.new(c, tr))
+f_tag(float y, color c, string t, string tip) =>
+    label.new(bar_index + rechts, y, t, style = label.style_label_left, color = color.new(c, 100), textcolor = c, size = size.small, tooltip = tip)
+f_sl(float y, color c, string t) =>
+    line.new(bar_index + rechts - 8, y, bar_index + rechts, y, color = c, width = 2)
+    label.new(bar_index + rechts, y, t, style = label.style_label_left, color = color.new(c, 100), textcolor = c, size = size.tiny)
+f_fib(float y, string t, string tip) =>
+    line.new(bar_index - links, y, bar_index + rechts, y, color = color.new(color.gray, 40), style = line.style_dotted)
+    label.new(bar_index - links, y, t, style = label.style_label_right, color = color.new(color.gray, 100), textcolor = color.gray, size = size.tiny, tooltip = tip)
 
 d1sma = request.security(syminfo.tickerid, "D", ta.sma(close, 50)[1], lookahead = barmerge.lookahead_on)
 d1ema = request.security(syminfo.tickerid, "D", ta.ema(close, 50)[1], lookahead = barmerge.lookahead_on)
@@ -24,43 +36,50 @@ plot(showD1 ? d1ema : na, "D1 EMA50", color = color.new(color.purple, 0), linewi
 
 var table tb = table.new(position.top_right, 1, 1)
 if barstate.islastconfirmedhistory
-    table.cell(tb, 0, 0, "SK Mo-Zonen · Stand 09.10.2026 13:33 · Kurs 82'752", text_color = color.gray, text_size = size.small)
-    if showLong
-        f_zone(67740.66, 82377.32, color.teal, 82, "LONG 67'741-82'377 | W1/D1/H4 GK Z 38'555 A 73'777 B 49'000")
-        f_line(57310.95, color.teal, "SL 78,6 % 57'311")
-    if showShort
-        f_zone(83806.78, 84946.80, color.red, 82, "SHORT 83'807-84'947 | D1/H4/15m BC Z 87'396 A 82'563 B 87'220 + H4/15m GK Z 87'220 A 83'888 B 86'999")
-        f_line(85759.14, color.red, "SL 78,6 % 85'759")
-        if showZiel
-            f_zone(77554.66, 79400.74, color.orange, 88, "Ziel SHORT 161,8-200 % 77'555-79'401")
-    if showLong
-        f_zone(70640.18, 74835.33, color.teal, 82, "LONG 70'640-74'835 | D1/H4 GK Z 62'275 A 65'474 B 62'535")
-        f_line(67650.82, color.teal, "SL 78,6 % 67'651")
-    if showLong
-        f_zone(67655.48, 72597.93, color.teal, 82, "LONG 67'655-72'598 | D1/H4 GK Z 57'800 A 66'956 B 62'275")
-        f_line(64133.62, color.teal, "SL 78,6 % 64'134")
-    if showShort
-        f_zone(83696.33, 84799.46, color.red, 82, "SHORT 83'696-84'799 | H4/15m GK Z 86'999 A 84'972 B 86'699")
-        f_line(85585.52, color.red, "SL 78,6 % 85'586")
-    if showShort
-        f_zone(82824.28, 83636.14, color.red, 82, "SHORT 82'824-83'636 | 15m BC Z 87'396 A 82'875 B 85'255")
-        f_line(84214.65, color.red, "SL 78,6 % 84'215")
-        if showZiel
-            f_zone(76213.52, 77940.44, color.orange, 88, "Ziel SHORT 161,8-200 % 76'214-77'940")
-    if showShort
-        f_zone(82037.74, 82586.89, color.red, 82, "SHORT 82'038-82'587 | 15m GK Z 83'682 A 83'062 B 83'606")
-        f_line(82978.20, color.red, "SL 78,6 % 82'978")
-    if showDV
-        f_zone(77554.66, 79400.74, color.lime, 70, "Doppelter Vorteil LONG 77'555-79'401")
-    if showDV
-        f_zone(76213.52, 77940.44, color.lime, 70, "Doppelter Vorteil LONG 76'214-77'940")
+    table.cell(tb, 0, 0, "SK Mo-Zonen · Stand 09.10.2026 13:44 · Kurs 82'992", text_color = color.gray, text_size = size.small)
+    if showLong and (zD1 or zH4) and 6.0 <= maxH
+        f_zone(67655.48, 72597.93, color.teal, 82)
+        f_tag(70126.71, color.teal, "LONG 67'655-72'598 · D1/H4", "D1/H4 Gesamtkorrektur: Z 57'800 A 66'956 B 62'275 C 87'396 · Zone 67'655-72'598 · SL 64'134")
+        if showSL
+            f_sl(64133.62, color.teal, "SL 64'134")
+    if showLong and (zW1 or zD1 or zH4) and 17.6 <= maxH
+        f_zone(67740.66, 82377.32, color.teal, 82)
+        f_tag(75058.99, color.teal, "LONG 67'741-82'377 · W1/D1/H4", "W1/D1/H4 Gesamtkorrektur: Z 38'555 A 73'777 B 49'000 C 126'200 · Zone 67'741-82'377 · SL 57'311")
+        if showSL
+            f_sl(57310.95, color.teal, "SL 57'311")
+    if showLong and (zD1 or zH4) and 5.1 <= maxH
+        f_zone(70640.18, 74835.33, color.teal, 82)
+        f_tag(72737.76, color.teal, "LONG 70'640-74'835 · D1/H4", "D1/H4 Gesamtkorrektur: Z 62'275 A 65'474 B 62'535 C 87'396 · Zone 70'640-74'835 · SL 67'651")
+        if showSL
+            f_sl(67650.82, color.teal, "SL 67'651")
+    if showShort and (z15) and 0.7 <= maxH
+        f_zone(82037.74, 82586.89, color.red, 82)
+        f_tag(82312.31, color.red, "SHORT 82'038-82'587 · 15m", "15m Gesamtkorrektur: Z 83'682 A 83'062 B 83'606 C 80'394 · Zone 82'038-82'587 · SL 82'978")
+        if showSL
+            f_sl(82978.20, color.red, "SL 82'978")
+    if showShort and (z15) and 1.0 <= maxH
+        f_zone(82824.28, 83636.14, color.red, 82)
+        f_tag(83230.21, color.red, "SHORT 82'824-83'636 · 15m", "15m BC-Level: Z 87'396 A 82'875 B 85'255 C 80'394 · Zone 82'824-83'636 · SL 84'215")
+        if showSL
+            f_sl(84214.65, color.red, "SL 84'215")
+    if showShort and (zD1 or zH4 or z15) and 1.5 <= maxH
+        f_zone(83696.33, 84946.80, color.red, 82)
+        f_tag(84321.57, color.red, "SHORT 83'696-84'947 · D1/H4/15m", "H4/15m Gesamtkorrektur: Z 86'999 A 84'972 B 86'699 C 80'394 · Zone 83'696-84'799 · SL 85'586\nD1/H4/15m BC-Level: Z 87'396 A 82'563 B 87'220 C 80'394 · Zone 83'807-84'947 · SL 85'759\nH4/15m Gesamtkorrektur: Z 87'220 A 83'888 B 86'999 C 80'394 · Zone 83'807-84'947 · SL 85'759")
+        if showSL
+            f_sl(85759.14, color.red, "SL 85'759")
+    if (showZiel or showDV) and (z15)
+        f_zone(76213.52, 77940.44, color.lime, 72)
+        f_tag(77076.98, color.lime, "Ziel SHORT 76'214-77'940 = DV LONG", "161,8-200 % · 15m\nDoppelter Vorteil LONG: in 76'214-77'940")
+    if (showZiel or showDV) and (zD1 or zH4 or z15)
+        f_zone(77554.66, 79400.74, color.lime, 72)
+        f_tag(78477.70, color.lime, "Ziel SHORT 77'555-79'401 = DV LONG", "161,8-200 % · D1/H4/15m\nDoppelter Vorteil LONG: in 77'555-79'401")
     if showFibo
-        f_line(81181.82, color.gray, "Fibo LONG 74'968>87'396 50 % 81'182")
-        f_line(79715.35, color.gray, "Fibo LONG 74'968>87'396 61,8 % 79'715")
-        f_line(79106.39, color.gray, "Fibo LONG 74'968>87'396 66,7 % 79'106")
-        f_line(77627.50, color.gray, "Fibo LONG 74'968>87'396 78,6 % 77'627")
+        f_fib(81181.82, "Fib L 50 % 81'182", "Fibo LONG 74'968 -> 87'396")
+        f_fib(79715.35, "Fib L 61,8 % 79'715", "Fibo LONG 74'968 -> 87'396")
+        f_fib(79106.39, "Fib L 66,7 % 79'106", "Fibo LONG 74'968 -> 87'396")
+        f_fib(77627.50, "Fib L 78,6 % 77'627", "Fibo LONG 74'968 -> 87'396")
     if showFibo
-        f_line(83894.61, color.gray, "Fibo SHORT 87'396>80'394 50 % 83'895")
-        f_line(84720.86, color.gray, "Fibo SHORT 87'396>80'394 61,8 % 84'721")
-        f_line(85063.97, color.gray, "Fibo SHORT 87'396>80'394 66,7 % 85'064")
-        f_line(85897.22, color.gray, "Fibo SHORT 87'396>80'394 78,6 % 85'897")
+        f_fib(83894.61, "Fib S 50 % 83'895", "Fibo SHORT 87'396 -> 80'394")
+        f_fib(84720.86, "Fib S 61,8 % 84'721", "Fibo SHORT 87'396 -> 80'394")
+        f_fib(85063.97, "Fib S 66,7 % 85'064", "Fibo SHORT 87'396 -> 80'394")
+        f_fib(85897.22, "Fib S 78,6 % 85'897", "Fibo SHORT 87'396 -> 80'394")
