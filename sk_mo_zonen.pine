@@ -1,8 +1,8 @@
 //@version=6
-// SK-System · Mo-Zonen (sk_mo 1.5.1) · Stand 11.10.2026 15:09 · Kurs 83'080
+// SK-System · Mo-Zonen (sk_mo 1.6.0) · Stand 11.10.2026 15:56 · Kurs 83'076
 // Feste Werte vom SK-Server - bei Aenderungen neu von der Webseite kopieren. Keine Anlageberatung.
 // Details zu jeder Zone: Maus auf die Beschriftung rechts neben dem Kasten.
-indicator("SK Mo-Zonen 11.10.2026 15:09", overlay = true, max_boxes_count = 100, max_lines_count = 100, max_labels_count = 100)
+indicator("SK Mo-Zonen 11.10.2026 15:56", overlay = true, max_boxes_count = 100, max_lines_count = 100, max_labels_count = 100)
 showLong  = input.bool(true, "Long-Zonen", group = "Anzeige")
 showShort = input.bool(true, "Short-Zonen (nur Beobachtung)", group = "Anzeige")
 showZiel  = input.bool(true, "Offene Ziele 161,8-200 %", group = "Anzeige")
@@ -10,6 +10,9 @@ showDV    = input.bool(true, "Doppelter Vorteil", group = "Anzeige")
 showSL    = input.bool(true, "SL 78,6 %", group = "Anzeige")
 showFibo  = input.bool(true, "Fibo-Welle", group = "Anzeige")
 showD1    = input.bool(true, "D1 SMA50 / EMA50 (live)", group = "Anzeige")
+showStr   = input.bool(true, "Struktur-Linien 0-A-B-C", group = "Strukturen")
+anzStr    = input.int(2, "Anzahl (naechste zum Kurs)", minval = 1, maxval = 6, group = "Strukturen")
+showStrZ  = input.bool(true, "Ziele 1,618 / 1,809 / 2", group = "Strukturen")
 showLiqH  = input.bool(true, "Heatmap (Screenshot)", group = "Liquiditaet", inline = "lq")
 showLiqV  = input.bool(true, "Mo (Video)", group = "Liquiditaet", inline = "lq")
 showLiqA  = input.bool(false, "abgeholte zeigen", group = "Liquiditaet")
@@ -45,6 +48,13 @@ f_liq(int t0, float lo, float hi, color c, int tr) =>
     box.new(t0, hi, time + rechts * timeframe.in_seconds() * 1000, lo, xloc = xloc.bar_time, border_color = color.new(c, 100), bgcolor = color.new(c, tr))
 f_liqv(int t0, float lo, float hi, color c) =>
     box.new(t0, hi, time + rechts * timeframe.in_seconds() * 1000, lo, xloc = xloc.bar_time, border_color = color.new(c, 30), border_style = line.style_dashed, bgcolor = color.new(c, 100))
+f_seg(int t1, float p1, int t2, float p2, color c) =>
+    line.new(t1, p1, t2, p2, xloc = xloc.bar_time, color = c, width = 2)
+f_pkt(int tt, float p, string t, bool oben, color c) =>
+    label.new(tt, p, t, xloc = xloc.bar_time, style = oben ? label.style_label_down : label.style_label_up, color = color.new(c, 100), textcolor = c, size = size.normal)
+f_zl(int t1, float p, string t, color c) =>
+    line.new(t1, p, time + rechts * timeframe.in_seconds() * 1000, p, xloc = xloc.bar_time, color = color.new(c, 30), style = line.style_dotted)
+    label.new(time + rechts * timeframe.in_seconds() * 1000, p, t, xloc = xloc.bar_time, style = label.style_label_left, color = color.new(c, 100), textcolor = c, size = size.small)
 f_hit(bool h, float lo, float hi) => h or (time > STAND and high >= lo and low <= hi)
 // Zone gebrochen: Kerze, die NACH dem Stand schliesst, schliesst jenseits SL (Chart-Zeitrahmen)
 f_bruch(bool br, bool long, float sl) => br or (time_close > STAND and barstate.isconfirmed and (long ? close < sl : close > sl))
@@ -163,6 +173,51 @@ if barstate.islastconfirmedhistory
         f_fib(84720.86, "Fib S 61,8 % 84'721", "Fibo SHORT 87'396 -> 80'394")
         f_fib(85063.97, "Fib S 66,7 % 85'064", "Fibo SHORT 87'396 -> 80'394")
         f_fib(85897.22, "Fib S 78,6 % 85'897", "Fibo SHORT 87'396 -> 80'394")
+if barstate.islastconfirmedhistory and showStr
+    if anzStr > 0
+        f_seg(1791158400000, 86999.11, 1791216000000, 84972.01, color.rgb(255, 60, 70))
+        f_seg(1791216000000, 84972.01, 1791288000000, 86698.99, color.rgb(255, 60, 70))
+        f_seg(1791288000000, 86698.99, 1791475200000, 80393.56, color.rgb(255, 60, 70))
+        f_pkt(1791158400000, 86999.11, "(0)", true, color.rgb(255, 60, 70))
+        f_pkt(1791216000000, 84972.01, "(A)", false, color.rgb(255, 60, 70))
+        f_pkt(1791288000000, 86698.99, "(B)", true, color.rgb(255, 60, 70))
+        f_pkt(1791475200000, 80393.56, "(C)", false, color.rgb(255, 60, 70))
+    if anzStr > 1
+        f_seg(1789948800000, 87395.67, 1790553600000, 82563.00, color.rgb(255, 60, 70))
+        f_seg(1790553600000, 82563.00, 1790899200000, 87220.00, color.rgb(255, 60, 70))
+        f_seg(1790899200000, 87220.00, 1791417600000, 80393.56, color.rgb(255, 60, 70))
+        f_pkt(1789948800000, 87395.67, "(0)", true, color.rgb(255, 60, 70))
+        f_pkt(1790553600000, 82563.00, "(A)", false, color.rgb(255, 60, 70))
+        f_pkt(1790899200000, 87220.00, "(B)", true, color.rgb(255, 60, 70))
+        f_pkt(1791417600000, 80393.56, "(C)", false, color.rgb(255, 60, 70))
+        if showStrZ
+            f_zl(1791417600000, 79400.74, "1,618 (79'401) · D1/H4/15m", color.rgb(255, 60, 70))
+            f_zl(1791417600000, 78477.70, "1,809 (78'478) · D1/H4/15m", color.rgb(255, 60, 70))
+            f_zl(1791417600000, 77554.66, "2 (77'555) · D1/H4/15m", color.rgb(255, 60, 70))
+    if anzStr > 2
+        f_seg(1790942400000, 87220.00, 1790956800000, 83888.00, color.rgb(255, 60, 70))
+        f_seg(1790956800000, 83888.00, 1791158400000, 86999.11, color.rgb(255, 60, 70))
+        f_seg(1791158400000, 86999.11, 1791475200000, 80393.56, color.rgb(255, 60, 70))
+        f_pkt(1790942400000, 87220.00, "(0)", true, color.rgb(255, 60, 70))
+        f_pkt(1790956800000, 83888.00, "(A)", false, color.rgb(255, 60, 70))
+        f_pkt(1791158400000, 86999.11, "(B)", true, color.rgb(255, 60, 70))
+        f_pkt(1791475200000, 80393.56, "(C)", false, color.rgb(255, 60, 70))
+    if anzStr > 3
+        f_seg(1785542400000, 62275.00, 1786233600000, 65474.46, color.rgb(0, 200, 120))
+        f_seg(1786233600000, 65474.46, 1786665600000, 62535.24, color.rgb(0, 200, 120))
+        f_seg(1786665600000, 62535.24, 1789948800000, 87395.67, color.rgb(0, 200, 120))
+        f_pkt(1785542400000, 62275.00, "(0)", false, color.rgb(0, 200, 120))
+        f_pkt(1786233600000, 65474.46, "(A)", true, color.rgb(0, 200, 120))
+        f_pkt(1786665600000, 62535.24, "(B)", false, color.rgb(0, 200, 120))
+        f_pkt(1789948800000, 87395.67, "(C)", true, color.rgb(0, 200, 120))
+    if anzStr > 4
+        f_seg(1782864000000, 57800.19, 1784592000000, 66956.15, color.rgb(0, 200, 120))
+        f_seg(1784592000000, 66956.15, 1785542400000, 62275.00, color.rgb(0, 200, 120))
+        f_seg(1785542400000, 62275.00, 1789948800000, 87395.67, color.rgb(0, 200, 120))
+        f_pkt(1782864000000, 57800.19, "(0)", false, color.rgb(0, 200, 120))
+        f_pkt(1784592000000, 66956.15, "(A)", true, color.rgb(0, 200, 120))
+        f_pkt(1785542400000, 62275.00, "(B)", false, color.rgb(0, 200, 120))
+        f_pkt(1789948800000, 87395.67, "(C)", true, color.rgb(0, 200, 120))
 if barstate.islastconfirmedhistory
     if showLiqV and (showLiqA or not lh0)
         lb_0 := f_liqv(1791698556000, 87300.00, 87900.00, color.rgb(68, 190, 112))
@@ -223,7 +278,7 @@ if barstate.islast
 
 var table dash = table.new(dashPos == "oben rechts" ? position.top_right : dashPos == "unten rechts" ? position.bottom_right : dashPos == "oben links" ? position.top_left : position.bottom_left, 5, 9, bgcolor = dashBg, border_width = 0, frame_width = 1, frame_color = color.new(color.gray, 70))
 if barstate.islast and showDash
-    table.cell(dash, 0, 0, "SK 11.10. 15:09", text_color = color.gray, text_size = ts)
+    table.cell(dash, 0, 0, "SK 11.10. 15:56", text_color = color.gray, text_size = ts)
     table.cell(dash, 1, 0, "Zone", text_color = color.gray, text_size = ts)
     table.cell(dash, 2, 0, "TF", text_color = color.gray, text_size = ts)
     table.cell(dash, 3, 0, "SL", text_color = color.gray, text_size = ts)
