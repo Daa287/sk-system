@@ -1,8 +1,8 @@
 //@version=6
-// SK-System · Mo-Zonen (sk_mo 1.6.1) · Stand 17.10.2026 18:09 · Kurs 81'396
+// SK-System · Mo-Zonen (sk_mo 1.6.1) · Stand 17.10.2026 18:13 · Kurs 81'390
 // Feste Werte vom SK-Server - bei Aenderungen neu von der Webseite kopieren. Keine Anlageberatung.
 // Details zu jeder Zone: Maus auf die Beschriftung rechts neben dem Kasten.
-indicator("SK Mo-Zonen 17.10.2026 18:09", overlay = true, max_boxes_count = 100, max_lines_count = 100, max_labels_count = 100)
+indicator("SK Mo-Zonen 17.10.2026 18:13", overlay = true, max_boxes_count = 100, max_lines_count = 100, max_labels_count = 100)
 showLong  = input.bool(true, "Long-Zonen", group = "Anzeige")
 showShort = input.bool(true, "Short-Zonen (nur Beobachtung)", group = "Anzeige")
 showZiel  = input.bool(true, "Offene Ziele 161,8-200 %", group = "Anzeige")
@@ -92,35 +92,29 @@ var bool lh0 = false
 lh0 := f_hit(lh0, 91000.00, 92300.00)
 var box lb_0 = na
 var bool lh1 = false
-lh1 := f_hit(lh1, 86528.00, 86595.00)
+lh1 := f_hit(lh1, 89063.00, 89179.00)
 var box lb_1 = na
 var bool lh2 = false
-lh2 := f_hit(lh2, 85639.00, 85874.00)
+lh2 := f_hit(lh2, 87277.00, 88314.00)
 var box lb_2 = na
 var bool lh3 = false
-lh3 := f_hit(lh3, 82973.00, 83208.00)
+lh3 := f_hit(lh3, 86873.00, 86960.00)
 var box lb_3 = na
 var bool lh4 = false
-lh4 := f_hit(lh4, 82151.00, 82419.00)
+lh4 := f_hit(lh4, 84510.00, 85144.00)
 var box lb_4 = na
 var bool lh5 = false
-lh5 := f_hit(lh5, 80977.00, 81078.00)
+lh5 := f_hit(lh5, 79236.00, 79899.00)
 var box lb_5 = na
 var bool lh6 = false
-lh6 := f_hit(lh6, 79115.00, 79182.00)
+lh6 := f_hit(lh6, 78600.00, 78600.00)
 var box lb_6 = na
 var bool lh7 = false
-lh7 := f_hit(lh7, 78600.00, 78600.00)
+lh7 := f_hit(lh7, 77997.00, 78084.00)
 var box lb_7 = na
 var bool lh8 = false
-lh8 := f_hit(lh8, 78310.00, 78478.00)
+lh8 := f_hit(lh8, 74481.00, 74481.00)
 var box lb_8 = na
-var bool lh9 = false
-lh9 := f_hit(lh9, 77002.00, 77036.00)
-var box lb_9 = na
-var bool lh10 = false
-lh10 := f_hit(lh10, 74481.00, 74481.00)
-var box lb_10 = na
 if barstate.islastconfirmedhistory
     if showLong and (zD1 or zH4) and 6.1 <= maxH
         bx0 := f_zone(67655.48, 72597.93, color.teal, 82)
@@ -251,25 +245,21 @@ if barstate.islastconfirmedhistory
     if showLiqV and (showLiqA or not lh0)
         lb_0 := f_liqv(1792220491000, 91000.00, 92300.00, color.rgb(253, 231, 37))
     if showLiqH and (showLiqA or not lh1)
-        lb_1 := f_liq(1792079827974, 86528.00, 86595.00, color.rgb(41, 120, 142), 75)
+        lb_1 := f_liq(1789661567321, 89063.00, 89179.00, color.rgb(41, 120, 142), 75)
     if showLiqH and (showLiqA or not lh2)
-        lb_2 := f_liq(1792079827974, 85639.00, 85874.00, color.rgb(68, 190, 112), 65)
+        lb_2 := f_liq(1789661567321, 87277.00, 88314.00, color.rgb(253, 231, 37), 45)
     if showLiqH and (showLiqA or not lh3)
-        lb_3 := f_liq(1792079827974, 82973.00, 83208.00, color.rgb(253, 231, 37), 45)
+        lb_3 := f_liq(1789661567321, 86873.00, 86960.00, color.rgb(41, 120, 142), 75)
     if showLiqH and (showLiqA or not lh4)
-        lb_4 := f_liq(1792079827974, 82151.00, 82419.00, color.rgb(68, 190, 112), 65)
+        lb_4 := f_liq(1789661567321, 84510.00, 85144.00, color.rgb(68, 190, 112), 65)
     if showLiqH and (showLiqA or not lh5)
-        lb_5 := f_liq(1792079827974, 80977.00, 81078.00, color.rgb(41, 120, 142), 75)
-    if showLiqH and (showLiqA or not lh6)
-        lb_6 := f_liq(1792079827974, 79115.00, 79182.00, color.rgb(41, 120, 142), 75)
-    if showLiqV and (showLiqA or not lh7)
-        lb_7 := f_liqv(1792220491000, 78552.84, 78647.16, color.rgb(68, 190, 112))
-    if showLiqH and (showLiqA or not lh8)
-        lb_8 := f_liq(1792079827974, 78310.00, 78478.00, color.rgb(68, 190, 112), 65)
-    if showLiqH and (showLiqA or not lh9)
-        lb_9 := f_liq(1792079827974, 77002.00, 77036.00, color.rgb(41, 120, 142), 75)
-    if showLiqV and (showLiqA or not lh10)
-        lb_10 := f_liqv(1792220491000, 74436.31, 74525.69, color.rgb(68, 190, 112))
+        lb_5 := f_liq(1789661567321, 79236.00, 79899.00, color.rgb(68, 190, 112), 65)
+    if showLiqV and (showLiqA or not lh6)
+        lb_6 := f_liqv(1792220491000, 78552.84, 78647.16, color.rgb(68, 190, 112))
+    if showLiqH and (showLiqA or not lh7)
+        lb_7 := f_liq(1789661567321, 77997.00, 78084.00, color.rgb(41, 120, 142), 75)
+    if showLiqV and (showLiqA or not lh8)
+        lb_8 := f_liqv(1792220491000, 74436.31, 74525.69, color.rgb(68, 190, 112))
 if barstate.islast
     if lh0 and not showLiqA and not na(lb_0)
         box.delete(lb_0)
@@ -298,16 +288,10 @@ if barstate.islast
     if lh8 and not showLiqA and not na(lb_8)
         box.delete(lb_8)
         lb_8 := na
-    if lh9 and not showLiqA and not na(lb_9)
-        box.delete(lb_9)
-        lb_9 := na
-    if lh10 and not showLiqA and not na(lb_10)
-        box.delete(lb_10)
-        lb_10 := na
 
 var table dash = table.new(dashPos == "oben rechts" ? position.top_right : dashPos == "unten rechts" ? position.bottom_right : dashPos == "oben links" ? position.top_left : position.bottom_left, 5, 11, bgcolor = dashBg, border_width = 0, frame_width = 1, frame_color = color.new(color.gray, 70))
 if barstate.islast and showDash
-    table.cell(dash, 0, 0, "SK 17.10. 18:09", text_color = color.gray, text_size = ts)
+    table.cell(dash, 0, 0, "SK 17.10. 18:13", text_color = color.gray, text_size = ts)
     table.cell(dash, 1, 0, "Zone", text_color = color.gray, text_size = ts)
     table.cell(dash, 2, 0, "TF", text_color = color.gray, text_size = ts)
     table.cell(dash, 3, 0, "SL", text_color = color.gray, text_size = ts)
@@ -350,18 +334,18 @@ if barstate.islast and showDash
         table.cell(dash, 4, r, false ? "" : f_stat(77554.66, 79400.74), text_color = false ? color.gray : color.white, text_size = ts, bgcolor = not false and f_in(77554.66, 79400.74) ? color.new(color.lime, 45) : na)
         r += 1
     if showLiqH
-        table.cell(dash, 0, r, "Liq ★ ↑", text_color = color.rgb(253, 231, 37), text_size = ts, text_halign = text.align_left)
-        table.cell(dash, 1, r, "82'973–83'208", text_color = color.white, text_size = ts)
-        table.cell(dash, 2, r, "HM 48h", text_color = color.gray, text_size = ts)
+        table.cell(dash, 0, r, "Liq ↑", text_color = color.rgb(68, 190, 112), text_size = ts, text_halign = text.align_left)
+        table.cell(dash, 1, r, "84'510–85'144", text_color = color.white, text_size = ts)
+        table.cell(dash, 2, r, "HM 1M", text_color = color.gray, text_size = ts)
         table.cell(dash, 3, r, "", text_color = color.gray, text_size = ts)
-        table.cell(dash, 4, r, lh3 ? "abgeholt" : f_stat(82973.00, 83208.00), text_color = lh3 ? color.gray : color.white, text_size = ts, bgcolor = not lh3 and f_in(82973.00, 83208.00) ? color.new(color.rgb(253, 231, 37), 45) : na)
+        table.cell(dash, 4, r, lh4 ? "abgeholt" : f_stat(84510.00, 85144.00), text_color = lh4 ? color.gray : color.white, text_size = ts, bgcolor = not lh4 and f_in(84510.00, 85144.00) ? color.new(color.rgb(68, 190, 112), 45) : na)
         r += 1
-    if showLiqH or showLiqV
+    if showLiqH
         table.cell(dash, 0, r, "Liq ↓", text_color = color.rgb(68, 190, 112), text_size = ts, text_halign = text.align_left)
-        table.cell(dash, 1, r, "78'310–78'478", text_color = color.white, text_size = ts)
-        table.cell(dash, 2, r, "HM+Mo ✓", text_color = color.gray, text_size = ts)
+        table.cell(dash, 1, r, "79'236–79'899", text_color = color.white, text_size = ts)
+        table.cell(dash, 2, r, "HM 1M", text_color = color.gray, text_size = ts)
         table.cell(dash, 3, r, "", text_color = color.gray, text_size = ts)
-        table.cell(dash, 4, r, lh8 ? "abgeholt" : f_stat(78310.00, 78478.00), text_color = lh8 ? color.gray : color.white, text_size = ts, bgcolor = not lh8 and f_in(78310.00, 78478.00) ? color.new(color.rgb(68, 190, 112), 45) : na)
+        table.cell(dash, 4, r, lh5 ? "abgeholt" : f_stat(79236.00, 79899.00), text_color = lh5 ? color.gray : color.white, text_size = ts, bgcolor = not lh5 and f_in(79236.00, 79899.00) ? color.new(color.rgb(68, 190, 112), 45) : na)
         r += 1
     if dashFib
         table.cell(dash, 0, r, "Fib L", text_color = color.gray, text_size = ts, text_halign = text.align_left)
