@@ -1,8 +1,8 @@
 //@version=6
-// SK-System · Mo-Zonen (sk_mo 1.6.1) · Stand 21.10.2026 02:09 · Kurs 82'963
+// SK-System · Mo-Zonen (sk_mo 1.6.1) · Stand 21.10.2026 03:09 · Kurs 82'834
 // Feste Werte vom SK-Server - bei Aenderungen neu von der Webseite kopieren. Keine Anlageberatung.
 // Details zu jeder Zone: Maus auf die Beschriftung rechts neben dem Kasten.
-indicator("SK Mo-Zonen 21.10.2026 02:09", overlay = true, max_boxes_count = 100, max_lines_count = 100, max_labels_count = 100)
+indicator("SK Mo-Zonen 21.10.2026 03:09", overlay = true, max_boxes_count = 100, max_lines_count = 100, max_labels_count = 100)
 showLong  = input.bool(true, "Long-Zonen", group = "Anzeige")
 showShort = input.bool(true, "Short-Zonen (nur Beobachtung)", group = "Anzeige")
 showZiel  = input.bool(true, "Offene Ziele 161,8-200 %", group = "Anzeige")
@@ -31,7 +31,7 @@ dashFib  = input.bool(true, "Fibo- und D1-Zeilen", group = "Dashboard")
 dashDeck = input.bool(true, "Hintergrund deckend", group = "Dashboard")
 dashBg = dashDeck ? color.rgb(19, 23, 34) : color.new(color.black, 45)
 ts = dashGr == "winzig" ? size.tiny : dashGr == "klein" ? size.small : size.normal
-STAND = 1792544400000  // Datenstand (ms); Brueche danach werden live erkannt
+STAND = 1792548000000  // Datenstand (ms); Brueche danach werden live erkannt
 
 f_zone(float lo, float hi, color c, int tr) =>
     box.new(bar_index - links, hi, bar_index + rechts, lo, border_color = color.new(c, 40), bgcolor = color.new(c, tr))
@@ -150,7 +150,7 @@ if barstate.islastconfirmedhistory
         lb0 := f_tag(70126.71, color.teal, "LONG 67'655-72'598 · D1/H4 · SL 64'134", "D1/H4 Gesamtkorrektur: Z 57'800 A 66'956 B 62'275 C 87'396 · Zone 67'655-72'598 · SL 64'134")
         if showSL
             f_sl(64133.62, color.teal)
-    if showLong and (zW1 or zD1 or zH4) and 17.6 <= maxH
+    if showLong and (zW1 or zD1 or zH4) and 17.7 <= maxH
         bx1 := f_zone(67740.66, 82377.32, color.teal, 82)
         lb1 := f_tag(75058.99, color.teal, "LONG 67'741-82'377 · W1/D1/H4 · SL 57'311", "W1/D1/H4 Gesamtkorrektur: Z 38'555 A 73'777 B 49'000 C 126'200 · Zone 67'741-82'377 · SL 57'311")
         if showSL
@@ -264,26 +264,6 @@ if barstate.islastconfirmedhistory and showStr
             f_zl(1792071900000, 78165.12, "1,809 (78'165) · H4", color.rgb(255, 60, 70))
             f_zl(1792071900000, 77531.32, "2 (77'531) · H4", color.rgb(255, 60, 70))
     if anzStr > 2
-        f_seg(1790020800000, 87395.67, 1790606700000, 82563.00, color.rgb(255, 60, 70))
-        f_seg(1790606700000, 82563.00, 1790944200000, 87220.00, color.rgb(255, 60, 70))
-        f_seg(1790944200000, 87220.00, 1792071900000, 79800.00, color.rgb(255, 60, 70))
-        f_pkt(1790020800000, 87395.67, "(0)", true, color.rgb(255, 60, 70))
-        f_pkt(1790606700000, 82563.00, "(A)", false, color.rgb(255, 60, 70))
-        f_pkt(1790944200000, 87220.00, "(B)", true, color.rgb(255, 60, 70))
-        f_pkt(1792071900000, 79800.00, "(C)", false, color.rgb(255, 60, 70))
-        if showStrZ
-            f_zl(1792071900000, 79400.74, "1,618 (79'401) · D1/H4/15m", color.rgb(255, 60, 70))
-            f_zl(1792071900000, 78477.70, "1,809 (78'478) · D1/H4/15m", color.rgb(255, 60, 70))
-            f_zl(1792071900000, 77554.66, "2 (77'555) · D1/H4/15m", color.rgb(255, 60, 70))
-    if anzStr > 3
-        f_seg(1790944200000, 87220.00, 1790966700000, 83888.00, color.rgb(255, 60, 70))
-        f_seg(1790966700000, 83888.00, 1791162900000, 86999.11, color.rgb(255, 60, 70))
-        f_seg(1791162900000, 86999.11, 1792071900000, 79800.00, color.rgb(255, 60, 70))
-        f_pkt(1790944200000, 87220.00, "(0)", true, color.rgb(255, 60, 70))
-        f_pkt(1790966700000, 83888.00, "(A)", false, color.rgb(255, 60, 70))
-        f_pkt(1791162900000, 86999.11, "(B)", true, color.rgb(255, 60, 70))
-        f_pkt(1792071900000, 79800.00, "(C)", false, color.rgb(255, 60, 70))
-    if anzStr > 4
         f_seg(1792354500000, 80684.36, 1792395000000, 83158.00, color.rgb(0, 200, 120))
         f_seg(1792395000000, 83158.00, 1792458000000, 81200.00, color.rgb(0, 200, 120))
         f_seg(1792458000000, 81200.00, 1792507500000, 83439.00, color.rgb(0, 200, 120))
@@ -295,7 +275,7 @@ if barstate.islastconfirmedhistory and showStr
             f_zl(1792507500000, 85202.35, "1,618 (85'202) · 15m", color.rgb(0, 200, 120))
             f_zl(1792507500000, 85674.81, "1,809 (85'675) · 15m", color.rgb(0, 200, 120))
             f_zl(1792507500000, 86147.28, "2 (86'147) · 15m", color.rgb(0, 200, 120))
-    if anzStr > 5
+    if anzStr > 3
         f_seg(1792071900000, 79800.00, 1792395000000, 83158.00, color.rgb(0, 200, 120))
         f_seg(1792395000000, 83158.00, 1792458000000, 81200.00, color.rgb(0, 200, 120))
         f_seg(1792458000000, 81200.00, 1792507500000, 83439.00, color.rgb(0, 200, 120))
@@ -307,6 +287,26 @@ if barstate.islastconfirmedhistory and showStr
             f_zl(1792507500000, 86633.24, "1,618 (86'633) · 15m", color.rgb(0, 200, 120))
             f_zl(1792507500000, 87274.62, "1,809 (87'275) · 15m", color.rgb(0, 200, 120))
             f_zl(1792507500000, 87916.00, "2 (87'916) · 15m", color.rgb(0, 200, 120))
+    if anzStr > 4
+        f_seg(1792458000000, 81200.00, 1792469700000, 82272.06, color.rgb(0, 200, 120))
+        f_seg(1792469700000, 82272.06, 1792503000000, 81322.22, color.rgb(0, 200, 120))
+        f_seg(1792503000000, 81322.22, 1792507500000, 83439.00, color.rgb(0, 200, 120))
+        f_pkt(1792458000000, 81200.00, "(0)", false, color.rgb(0, 200, 120))
+        f_pkt(1792469700000, 82272.06, "(A)", true, color.rgb(0, 200, 120))
+        f_pkt(1792503000000, 81322.22, "(B)", false, color.rgb(0, 200, 120))
+        f_pkt(1792507500000, 83439.00, "(C)", true, color.rgb(0, 200, 120))
+    if anzStr > 5
+        f_seg(1790020800000, 87395.67, 1790606700000, 82563.00, color.rgb(255, 60, 70))
+        f_seg(1790606700000, 82563.00, 1790944200000, 87220.00, color.rgb(255, 60, 70))
+        f_seg(1790944200000, 87220.00, 1792071900000, 79800.00, color.rgb(255, 60, 70))
+        f_pkt(1790020800000, 87395.67, "(0)", true, color.rgb(255, 60, 70))
+        f_pkt(1790606700000, 82563.00, "(A)", false, color.rgb(255, 60, 70))
+        f_pkt(1790944200000, 87220.00, "(B)", true, color.rgb(255, 60, 70))
+        f_pkt(1792071900000, 79800.00, "(C)", false, color.rgb(255, 60, 70))
+        if showStrZ
+            f_zl(1792071900000, 79400.74, "1,618 (79'401) · D1/H4/15m", color.rgb(255, 60, 70))
+            f_zl(1792071900000, 78477.70, "1,809 (78'478) · D1/H4/15m", color.rgb(255, 60, 70))
+            f_zl(1792071900000, 77554.66, "2 (77'555) · D1/H4/15m", color.rgb(255, 60, 70))
 if barstate.islastconfirmedhistory
     if showLiqH and (showLiqA or not lh0)
         lb_0 := f_liqv(1789661567321, 89063.00, 89179.00, color.rgb(41, 120, 142))
@@ -392,7 +392,7 @@ if barstate.islast
 
 var table dash = table.new(dashPos == "oben rechts" ? position.top_right : dashPos == "unten rechts" ? position.bottom_right : dashPos == "oben links" ? position.top_left : position.bottom_left, 5, 16, bgcolor = dashBg, border_width = 0, frame_width = 1, frame_color = color.new(color.gray, 70))
 if barstate.islast and showDash
-    table.cell(dash, 0, 0, "SK 21.10. 02:09", text_color = color.gray, text_size = ts)
+    table.cell(dash, 0, 0, "SK 21.10. 03:09", text_color = color.gray, text_size = ts)
     table.cell(dash, 1, 0, "Zone", text_color = color.gray, text_size = ts)
     table.cell(dash, 2, 0, "TF", text_color = color.gray, text_size = ts)
     table.cell(dash, 3, 0, "SL", text_color = color.gray, text_size = ts)
@@ -413,7 +413,7 @@ if barstate.islast and showDash
         table.cell(dash, 3, r, "83'233", text_color = color.gray, text_size = ts)
         table.cell(dash, 4, r, br5 ? "gebrochen" : f_stat(81984.00, 82713.46), text_color = br5 ? color.gray : color.white, text_size = ts, bgcolor = not br5 and f_in(81984.00, 82713.46) ? color.new(color.red, 45) : na)
         r += 1
-    if showLong and (zW1 or zD1 or zH4) and 17.6 <= maxH
+    if showLong and (zW1 or zD1 or zH4) and 17.7 <= maxH
         table.cell(dash, 0, r, "L", text_color = color.teal, text_size = ts, text_halign = text.align_left)
         table.cell(dash, 1, r, "67'741–82'377", text_color = color.white, text_size = ts)
         table.cell(dash, 2, r, "W1/D1/H4", text_color = color.gray, text_size = ts)
