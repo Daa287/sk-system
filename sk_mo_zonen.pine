@@ -1,5 +1,5 @@
 //@version=6
-// SK-System · Mo-Zonen (sk_mo 1.6.1) · Stand 25.10.2026 02:09 · Kurs 80'804
+// SK-System · Mo-Zonen (sk_mo 1.6.1) · Stand 25.10.2026 02:09 · Kurs 80'802
 // Feste Werte vom SK-Server - bei Aenderungen neu von der Webseite kopieren. Keine Anlageberatung.
 // Details zu jeder Zone: Maus auf die Beschriftung rechts neben dem Kasten.
 indicator("SK Mo-Zonen 25.10.2026 02:09", overlay = true, max_boxes_count = 100, max_lines_count = 100, max_labels_count = 100)
@@ -31,7 +31,7 @@ dashFib  = input.bool(true, "Fibo- und D1-Zeilen", group = "Dashboard")
 dashDeck = input.bool(true, "Hintergrund deckend", group = "Dashboard")
 dashBg = dashDeck ? color.rgb(19, 23, 34) : color.new(color.black, 45)
 ts = dashGr == "winzig" ? size.tiny : dashGr == "klein" ? size.small : size.normal
-STAND = 1792890000000  // Datenstand (ms); Brueche danach werden live erkannt
+STAND = 1792893600000  // Datenstand (ms); Brueche danach werden live erkannt
 
 f_zone(float lo, float hi, color c, int tr) =>
     box.new(bar_index - links, hi, bar_index + rechts, lo, border_color = color.new(c, 40), bgcolor = color.new(c, tr))
