@@ -1,8 +1,8 @@
 //@version=6
-// SK-System · Mo-Zonen (sk_mo 1.6.1) · Stand 26.10.2026 10:09 · Kurs 80'228
+// SK-System · Mo-Zonen (sk_mo 1.6.1) · Stand 26.10.2026 11:09 · Kurs 80'464
 // Feste Werte vom SK-Server - bei Aenderungen neu von der Webseite kopieren. Keine Anlageberatung.
 // Details zu jeder Zone: Maus auf die Beschriftung rechts neben dem Kasten.
-indicator("SK Mo-Zonen 26.10.2026 10:09", overlay = true, max_boxes_count = 100, max_lines_count = 100, max_labels_count = 100)
+indicator("SK Mo-Zonen 26.10.2026 11:09", overlay = true, max_boxes_count = 100, max_lines_count = 100, max_labels_count = 100)
 showLong  = input.bool(true, "Long-Zonen", group = "Anzeige")
 showShort = input.bool(true, "Short-Zonen (nur Beobachtung)", group = "Anzeige")
 showZiel  = input.bool(true, "Offene Ziele 161,8-200 %", group = "Anzeige")
@@ -31,7 +31,7 @@ dashFib  = input.bool(true, "Fibo- und D1-Zeilen", group = "Dashboard")
 dashDeck = input.bool(true, "Hintergrund deckend", group = "Dashboard")
 dashBg = dashDeck ? color.rgb(19, 23, 34) : color.new(color.black, 45)
 ts = dashGr == "winzig" ? size.tiny : dashGr == "klein" ? size.small : size.normal
-STAND = 1793008800000  // Datenstand (ms); Brueche danach werden live erkannt
+STAND = 1793012400000  // Datenstand (ms); Brueche danach werden live erkannt
 
 f_zone(float lo, float hi, color c, int tr) =>
     box.new(bar_index - links, hi, bar_index + rechts, lo, border_color = color.new(c, 40), bgcolor = color.new(c, tr))
@@ -156,7 +156,7 @@ var bool lh20 = false
 lh20 := f_hit(lh20, 76250.00, 76449.00)
 var box lb_20 = na
 if barstate.islastconfirmedhistory
-    if showLong and (zD1 or zH4) and 6.2 <= maxH
+    if showLong and (zD1 or zH4) and 6.1 <= maxH
         bx0 := f_zone(67655.48, 72597.93, color.teal, 82)
         lb0 := f_tag(70126.71, color.teal, "LONG 67'655-72'598 · D1/H4 · SL 64'134", "D1/H4 Gesamtkorrektur: Z 57'800 A 66'956 B 62'275 C 87'396 · Zone 67'655-72'598 · SL 64'134")
         if showSL
@@ -176,7 +176,7 @@ if barstate.islastconfirmedhistory
         lb3 := f_tag(80319.68, color.red, "SHORT 80'160-80'479 · 15m · SL 80'677", "15m Gesamtkorrektur: Z 80'952 A 80'198 B 80'732 C 79'369 · Zone 80'160-80'424 · SL 80'613\n15m Gesamtkorrektur: Z 81'034 A 80'088 B 80'952 C 79'369 · Zone 80'201-80'479 · SL 80'677")
         if showSL
             f_sl(80677.38, color.red)
-    if showShort and (zH4) and 1.2 <= maxH
+    if showShort and (zH4) and 1.1 <= maxH
         bx4 := f_zone(82133.33, 83056.73, color.red, 82)
         lb4 := f_tag(82595.03, color.red, "SHORT 82'133-83'057 · H4 · SL 83'715", "H4 BC-Level: Z 87'396 A 79'800 B 84'898 C 79'369 · Zone 82'133-83'057 · SL 83'715")
         if showSL
@@ -392,7 +392,7 @@ if barstate.islast
 
 var table dash = table.new(dashPos == "oben rechts" ? position.top_right : dashPos == "unten rechts" ? position.bottom_right : dashPos == "oben links" ? position.top_left : position.bottom_left, 5, 12, bgcolor = dashBg, border_width = 0, frame_width = 1, frame_color = color.new(color.gray, 70))
 if barstate.islast and showDash
-    table.cell(dash, 0, 0, "SK 26.10. 10:09", text_color = color.gray, text_size = ts)
+    table.cell(dash, 0, 0, "SK 26.10. 11:09", text_color = color.gray, text_size = ts)
     table.cell(dash, 1, 0, "Zone", text_color = color.gray, text_size = ts)
     table.cell(dash, 2, 0, "TF", text_color = color.gray, text_size = ts)
     table.cell(dash, 3, 0, "SL", text_color = color.gray, text_size = ts)
@@ -406,7 +406,7 @@ if barstate.islast and showDash
         table.cell(dash, 3, r, "85'646", text_color = color.gray, text_size = ts)
         table.cell(dash, 4, r, br5 ? "gebrochen" : f_stat(83220.37, 84673.42), text_color = br5 ? color.gray : color.white, text_size = ts, bgcolor = not br5 and f_in(83220.37, 84673.42) ? color.new(color.red, 45) : na)
         r += 1
-    if showShort and (zH4) and 1.2 <= maxH
+    if showShort and (zH4) and 1.1 <= maxH
         table.cell(dash, 0, r, "S", text_color = color.red, text_size = ts, text_halign = text.align_left)
         table.cell(dash, 1, r, "82'133–83'057", text_color = color.white, text_size = ts)
         table.cell(dash, 2, r, "H4", text_color = color.gray, text_size = ts)
