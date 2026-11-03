@@ -1,8 +1,8 @@
 //@version=6
-// SK-System · Mo-Zonen (sk_mo 1.6.1) · Stand 03.11.2026 00:09 · Kurs 76'810
+// SK-System · Mo-Zonen (sk_mo 1.6.1) · Stand 03.11.2026 01:09 · Kurs 76'705
 // Feste Werte vom SK-Server - bei Aenderungen neu von der Webseite kopieren. Keine Anlageberatung.
 // Details zu jeder Zone: Maus auf die Beschriftung rechts neben dem Kasten.
-indicator("SK Mo-Zonen 03.11.2026 00:09", overlay = true, max_boxes_count = 100, max_lines_count = 100, max_labels_count = 100)
+indicator("SK Mo-Zonen 03.11.2026 01:09", overlay = true, max_boxes_count = 100, max_lines_count = 100, max_labels_count = 100)
 showLong  = input.bool(true, "Long-Zonen", group = "Anzeige")
 showShort = input.bool(true, "Short-Zonen (nur Beobachtung)", group = "Anzeige")
 showZiel  = input.bool(true, "Offene Ziele 161,8-200 %", group = "Anzeige")
@@ -31,7 +31,7 @@ dashFib  = input.bool(true, "Fibo- und D1-Zeilen", group = "Dashboard")
 dashDeck = input.bool(true, "Hintergrund deckend", group = "Dashboard")
 dashBg = dashDeck ? color.rgb(19, 23, 34) : color.new(color.black, 45)
 ts = dashGr == "winzig" ? size.tiny : dashGr == "klein" ? size.small : size.normal
-STAND = 1793664000000  // Datenstand (ms); Brueche danach werden live erkannt
+STAND = 1793667600000  // Datenstand (ms); Brueche danach werden live erkannt
 
 f_zone(float lo, float hi, color c, int tr) =>
     box.new(bar_index - links, hi, bar_index + rechts, lo, border_color = color.new(c, 40), bgcolor = color.new(c, tr))
@@ -239,6 +239,11 @@ if barstate.islastconfirmedhistory
         f_zone(70640.18, 72608.21, color.lime, 72)
         f_tag(71624.19, color.lime, "DV LONG 70'640-72'608", "Ziel von D1 Z 87'396 A 79'800 B 84'898 Ziel 69'707-72'608\nin D1 Gesamt Z 62'275 A 65'474 B 62'535")
     if showFibo
+        f_fib(77601.99, "Fib L 50 % 77'602", "Fibo LONG 76'326 -> 78'878")
+        f_fib(77300.86, "Fib L 61,8 % 77'301", "Fibo LONG 76'326 -> 78'878")
+        f_fib(77175.81, "Fib L 66,7 % 77'176", "Fibo LONG 76'326 -> 78'878")
+        f_fib(76872.11, "Fib L 78,6 % 76'872", "Fibo LONG 76'326 -> 78'878")
+    if showFibo
         f_fib(81662.54, "Fib S 50 % 81'663", "Fibo SHORT 86'999 -> 76'326")
         f_fib(82921.97, "Fib S 61,8 % 82'922", "Fibo SHORT 86'999 -> 76'326")
         f_fib(83444.96, "Fib S 66,7 % 83'445", "Fibo SHORT 86'999 -> 76'326")
@@ -403,14 +408,14 @@ if barstate.islast
         box.delete(lb_19)
         lb_19 := na
 
-var table dash = table.new(dashPos == "oben rechts" ? position.top_right : dashPos == "unten rechts" ? position.bottom_right : dashPos == "oben links" ? position.top_left : position.bottom_left, 5, 15, bgcolor = dashBg, border_width = 0, frame_width = 1, frame_color = color.new(color.gray, 70))
+var table dash = table.new(dashPos == "oben rechts" ? position.top_right : dashPos == "unten rechts" ? position.bottom_right : dashPos == "oben links" ? position.top_left : position.bottom_left, 5, 16, bgcolor = dashBg, border_width = 0, frame_width = 1, frame_color = color.new(color.gray, 70))
 if barstate.islast and showDash
-    table.cell(dash, 0, 0, "SK 03.11. 00:09", text_color = color.gray, text_size = ts)
+    table.cell(dash, 0, 0, "SK 03.11. 01:09", text_color = color.gray, text_size = ts)
     table.cell(dash, 1, 0, "Zone", text_color = color.gray, text_size = ts)
     table.cell(dash, 2, 0, "TF", text_color = color.gray, text_size = ts)
     table.cell(dash, 3, 0, "SL", text_color = color.gray, text_size = ts)
     table.cell(dash, 4, 0, "Kurs", text_color = color.gray, text_size = ts)
-    table.clear(dash, 0, 1, 4, 14)
+    table.clear(dash, 0, 1, 4, 15)
     int r = 1
     if showShort and (zD1 or zH4) and 2.4 <= maxH
         table.cell(dash, 0, r, "S", text_color = color.red, text_size = ts, text_halign = text.align_left)
@@ -497,6 +502,11 @@ if barstate.islast and showDash
         table.cell(dash, 4, r, lh15 ? "abgeholt" : f_stat(73600.00, 75300.00), text_color = lh15 ? color.gray : color.white, text_size = ts, bgcolor = not lh15 and f_in(73600.00, 75300.00) ? color.new(color.rgb(253, 231, 37), 45) : na)
         r += 1
     if dashFib
+        table.cell(dash, 0, r, "Fib L", text_color = color.gray, text_size = ts, text_halign = text.align_left)
+        table.cell(dash, 1, r, "77'602 / 77'301 / 77'176", text_color = color.gray, text_size = ts)
+        table.cell(dash, 2, r, "50/62/67", text_color = color.gray, text_size = ts)
+        table.cell(dash, 4, r, f_stat(77175.81, 77601.99), text_color = color.gray, text_size = ts)
+        r += 1
         table.cell(dash, 0, r, "Fib S", text_color = color.gray, text_size = ts, text_halign = text.align_left)
         table.cell(dash, 1, r, "81'663 / 82'922 / 83'445", text_color = color.gray, text_size = ts)
         table.cell(dash, 2, r, "50/62/67", text_color = color.gray, text_size = ts)
