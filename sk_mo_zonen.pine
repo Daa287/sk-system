@@ -1,8 +1,8 @@
 //@version=6
-// SK-System · Mo-Zonen (sk_mo 1.6.3) · Stand 22.11.2026 16:09 · Kurs 60'945
+// SK-System · Mo-Zonen (sk_mo 1.6.3) · Stand 22.11.2026 17:09 · Kurs 60'989
 // Feste Werte vom SK-Server - bei Aenderungen neu von der Webseite kopieren. Keine Anlageberatung.
 // Details zu jeder Zone: Maus auf die Beschriftung rechts neben dem Kasten.
-indicator("SK Mo-Zonen 22.11.2026 16:09", overlay = true, max_boxes_count = 100, max_lines_count = 100, max_labels_count = 100)
+indicator("SK Mo-Zonen 22.11.2026 17:09", overlay = true, max_boxes_count = 100, max_lines_count = 100, max_labels_count = 100)
 showLong  = input.bool(true, "Long-Zonen", group = "Anzeige")
 showShort = input.bool(true, "Short-Zonen (nur Beobachtung)", group = "Anzeige")
 showZiel  = input.bool(true, "Offene Ziele 161,8-200 %", group = "Anzeige")
@@ -31,7 +31,7 @@ dashFib  = input.bool(true, "Fibo- und D1-Zeilen", group = "Dashboard")
 dashDeck = input.bool(true, "Hintergrund deckend", group = "Dashboard")
 dashBg = dashDeck ? color.rgb(19, 23, 34) : color.new(color.black, 45)
 ts = dashGr == "winzig" ? size.tiny : dashGr == "klein" ? size.small : size.normal
-STAND = 1795363200000  // Datenstand (ms); Brueche danach werden live erkannt
+STAND = 1795366800000  // Datenstand (ms); Brueche danach werden live erkannt
 
 f_zone(float lo, float hi, color c, int tr) =>
     box.new(bar_index - links, hi, bar_index + rechts, lo, border_color = color.new(c, 40), bgcolor = color.new(c, tr))
@@ -69,7 +69,7 @@ plot(showD1 ? d1sma : na, "D1 SMA50", color = color.new(color.blue, 0), linewidt
 plot(showD1 ? d1ema : na, "D1 EMA50", color = color.new(color.purple, 0), linewidth = 2)
 
 var bool br0 = false
-br0 := f_bruch(br0, true, 60634.39)
+br0 := f_bruch(br0, true, 60634.47)
 var box bx0 = na
 var label lb0 = na
 var bool br1 = false
@@ -85,122 +85,128 @@ br3 := f_bruch(br3, false, 78527.65)
 var box bx3 = na
 var label lb3 = na
 var bool lh0 = false
-lh0 := f_hit(lh0, 67359.00, 67420.00)
+lh0 := f_hit(lh0, 67806.00, 67867.00)
 var box lb_0 = na
 var bool lh1 = false
-lh1 := f_hit(lh1, 67000.00, 67000.00)
+lh1 := f_hit(lh1, 67319.00, 67380.00)
 var box lb_1 = na
 var bool lh2 = false
-lh2 := f_hit(lh2, 66384.00, 66445.00)
+lh2 := f_hit(lh2, 67000.00, 67000.00)
 var box lb_2 = na
 var bool lh3 = false
-lh3 := f_hit(lh3, 65957.00, 66018.00)
+lh3 := f_hit(lh3, 66405.00, 66466.00)
 var box lb_3 = na
 var bool lh4 = false
-lh4 := f_hit(lh4, 64799.00, 64921.00)
+lh4 := f_hit(lh4, 65918.00, 66040.00)
 var box lb_4 = na
 var bool lh5 = false
-lh5 := f_hit(lh5, 64433.00, 64677.00)
+lh5 := f_hit(lh5, 65369.00, 65430.00)
 var box lb_5 = na
 var bool lh6 = false
-lh6 := f_hit(lh6, 63580.00, 64189.00)
+lh6 := f_hit(lh6, 64821.00, 64943.00)
 var box lb_6 = na
 var bool lh7 = false
-lh7 := f_hit(lh7, 63800.00, 63800.00)
+lh7 := f_hit(lh7, 64334.00, 64699.00)
 var box lb_7 = na
 var bool lh8 = false
-lh8 := f_hit(lh8, 63336.00, 63458.00)
+lh8 := f_hit(lh8, 63359.00, 64212.00)
 var box lb_8 = na
 var bool lh9 = false
-lh9 := f_hit(lh9, 62665.00, 63153.00)
+lh9 := f_hit(lh9, 63800.00, 63800.00)
 var box lb_9 = na
-var bool lh10 = true
-lh10 := f_hit(lh10, 60496.00, 62837.00)
+var bool lh10 = false
+lh10 := f_hit(lh10, 62628.00, 63237.00)
 var box lb_10 = na
 var bool lh11 = true
-lh11 := f_hit(lh11, 61000.00, 62600.00)
+lh11 := f_hit(lh11, 60496.00, 62837.00)
 var box lb_11 = na
 var bool lh12 = true
-lh12 := f_hit(lh12, 60714.00, 62571.00)
+lh12 := f_hit(lh12, 61000.00, 62600.00)
 var box lb_12 = na
-var bool lh13 = false
-lh13 := f_hit(lh13, 62239.00, 62482.00)
+var bool lh13 = true
+lh13 := f_hit(lh13, 60714.00, 62571.00)
 var box lb_13 = na
 var bool lh14 = false
-lh14 := f_hit(lh14, 61751.00, 61934.00)
+lh14 := f_hit(lh14, 62201.00, 62506.00)
 var box lb_14 = na
-var bool lh15 = true
-lh15 := f_hit(lh15, 59945.00, 60220.00)
+var bool lh15 = false
+lh15 := f_hit(lh15, 61714.00, 61958.00)
 var box lb_15 = na
 var bool lh16 = true
-lh16 := f_hit(lh16, 59893.00, 60071.00)
+lh16 := f_hit(lh16, 59945.00, 60220.00)
 var box lb_16 = na
-var bool lh17 = false
-lh17 := f_hit(lh17, 59983.00, 60044.00)
+var bool lh17 = true
+lh17 := f_hit(lh17, 59893.00, 60071.00)
 var box lb_17 = na
 var bool lh18 = false
-lh18 := f_hit(lh18, 58459.00, 58947.00)
+lh18 := f_hit(lh18, 59947.00, 60008.00)
 var box lb_18 = na
 var bool lh19 = false
-lh19 := f_hit(lh19, 57911.00, 58276.00)
+lh19 := f_hit(lh19, 58424.00, 58912.00)
 var box lb_19 = na
-var bool lh20 = true
-lh20 := f_hit(lh20, 57328.00, 58099.00)
+var bool lh20 = false
+lh20 := f_hit(lh20, 57876.00, 58302.00)
 var box lb_20 = na
 var bool lh21 = true
-lh21 := f_hit(lh21, 57786.00, 57964.00)
+lh21 := f_hit(lh21, 57328.00, 58099.00)
 var box lb_21 = na
-var bool lh22 = false
-lh22 := f_hit(lh22, 57545.00, 57728.00)
+var bool lh22 = true
+lh22 := f_hit(lh22, 57786.00, 57964.00)
 var box lb_22 = na
 var bool lh23 = false
-lh23 := f_hit(lh23, 56935.00, 57118.00)
+lh23 := f_hit(lh23, 57571.00, 57754.00)
 var box lb_23 = na
-var bool lh24 = true
-lh24 := f_hit(lh24, 56915.00, 57025.00)
+var bool lh24 = false
+lh24 := f_hit(lh24, 56962.00, 57145.00)
 var box lb_24 = na
-var bool lh25 = false
-lh25 := f_hit(lh25, 57000.00, 57000.00)
+var bool lh25 = true
+lh25 := f_hit(lh25, 56915.00, 57025.00)
 var box lb_25 = na
 var bool lh26 = false
-lh26 := f_hit(lh26, 56900.00, 56900.00)
+lh26 := f_hit(lh26, 57000.00, 57000.00)
 var box lb_26 = na
 var bool lh27 = false
-lh27 := f_hit(lh27, 55838.00, 55899.00)
+lh27 := f_hit(lh27, 56900.00, 56900.00)
 var box lb_27 = na
 var bool lh28 = false
-lh28 := f_hit(lh28, 55046.00, 55167.00)
+lh28 := f_hit(lh28, 55866.00, 55926.00)
 var box lb_28 = na
 var bool lh29 = false
-lh29 := f_hit(lh29, 54863.00, 54985.00)
+lh29 := f_hit(lh29, 55074.00, 55195.00)
 var box lb_29 = na
 var bool lh30 = false
-lh30 := f_hit(lh30, 54497.00, 54558.00)
+lh30 := f_hit(lh30, 54891.00, 55013.00)
 var box lb_30 = na
 var bool lh31 = false
-lh31 := f_hit(lh31, 54133.00, 54133.00)
+lh31 := f_hit(lh31, 54464.00, 54586.00)
 var box lb_31 = na
 var bool lh32 = false
-lh32 := f_hit(lh32, 53948.00, 54131.00)
+lh32 := f_hit(lh32, 54282.00, 54343.00)
 var box lb_32 = na
 var bool lh33 = false
-lh33 := f_hit(lh33, 53704.00, 53765.00)
+lh33 := f_hit(lh33, 53977.00, 54160.00)
 var box lb_33 = na
 var bool lh34 = false
-lh34 := f_hit(lh34, 53339.00, 53583.00)
+lh34 := f_hit(lh34, 54133.00, 54133.00)
 var box lb_34 = na
 var bool lh35 = false
-lh35 := f_hit(lh35, 51600.00, 52500.00)
+lh35 := f_hit(lh35, 53307.00, 53672.00)
 var box lb_35 = na
 var bool lh36 = false
-lh36 := f_hit(lh36, 52363.00, 52424.00)
+lh36 := f_hit(lh36, 52880.00, 52941.00)
 var box lb_36 = na
+var bool lh37 = false
+lh37 := f_hit(lh37, 51600.00, 52500.00)
+var box lb_37 = na
+var bool lh38 = false
+lh38 := f_hit(lh38, 52393.00, 52454.00)
+var box lb_38 = na
 if barstate.islastconfirmedhistory
     if showLong and (z15) and 0.2 <= maxH
-        bx0 := f_zone(60699.98, 60792.02, color.teal, 82)
-        lb0 := f_tag(60746.00, color.teal, "LONG 60'700-60'792 · 15m · SL 60'634", "15m BC-Level: Z 60'464 A 60'965 B 60'516 C 61'068 · Zone 60'700-60'792 · SL 60'634")
+        bx0 := f_zone(60700.11, 60792.22, color.teal, 82)
+        lb0 := f_tag(60746.16, color.teal, "LONG 60'700-60'792 · 15m · SL 60'634", "15m BC-Level: Z 60'464 A 60'965 B 60'516 C 61'068 · Zone 60'700-60'792 · SL 60'634")
         if showSL
-            f_sl(60634.39, color.teal)
+            f_sl(60634.47, color.teal)
     if showLong and (zW1 or zD1) and 24.0 <= maxH
         bx1 := f_zone(67740.66, 82377.32, color.teal, 82)
         lb1 := f_tag(75058.99, color.teal, "LONG 67'741-82'377 · W1/D1 · SL 57'311", "W1/D1 Gesamtkorrektur: Z 38'555 A 73'777 B 49'000 C 126'200 · Zone 67'741-82'377 · SL 57'311")
@@ -258,15 +264,15 @@ if barstate.islastconfirmedhistory and showStr
     if anzStr > 1
         f_seg(1795349700000, 60464.01, 1795351500000, 60965.48, color.rgb(0, 200, 120))
         f_seg(1795351500000, 60965.48, 1795355100000, 60516.44, color.rgb(0, 200, 120))
-        f_seg(1795355100000, 60516.44, 1795357800000, 61067.60, color.rgb(0, 200, 120))
+        f_seg(1795355100000, 60516.44, 1795359600000, 61068.00, color.rgb(0, 200, 120))
         f_pkt(1795349700000, 60464.01, "(0)", false, color.rgb(0, 200, 120))
         f_pkt(1795351500000, 60965.48, "(A)", true, color.rgb(0, 200, 120))
         f_pkt(1795355100000, 60516.44, "(B)", false, color.rgb(0, 200, 120))
-        f_pkt(1795357800000, 61067.60, "(C)", true, color.rgb(0, 200, 120))
+        f_pkt(1795359600000, 61068.00, "(C)", true, color.rgb(0, 200, 120))
         if showStrZ
-            f_zl(1795357800000, 61327.82, "1,618 (61'328) · 15m", color.rgb(0, 200, 120))
-            f_zl(1795357800000, 61423.60, "1,809 (61'424) · 15m", color.rgb(0, 200, 120))
-            f_zl(1795357800000, 61519.38, "2 (61'519) · 15m", color.rgb(0, 200, 120))
+            f_zl(1795359600000, 61327.82, "1,618 (61'328) · 15m", color.rgb(0, 200, 120))
+            f_zl(1795359600000, 61423.60, "1,809 (61'424) · 15m", color.rgb(0, 200, 120))
+            f_zl(1795359600000, 61519.38, "2 (61'519) · 15m", color.rgb(0, 200, 120))
     if anzStr > 2
         f_seg(1793289600000, 81971.00, 1793761200000, 75736.38, color.rgb(255, 60, 70))
         f_seg(1793761200000, 75736.38, 1793805300000, 81196.01, color.rgb(255, 60, 70))
@@ -285,79 +291,83 @@ if barstate.islastconfirmedhistory and showStr
         f_pkt(1795241700000, 55130.00, "(C)", false, color.rgb(255, 60, 70))
 if barstate.islastconfirmedhistory
     if showLiqH and (showLiqA or not lh0)
-        lb_0 := f_liq(1795273502049, 67359.00, 67420.00, color.rgb(41, 120, 142), 75)
-    if showLiqV and (showLiqA or not lh1)
-        lb_1 := f_liqv(1795334663000, 66959.80, 67040.20, color.rgb(68, 190, 112))
-    if showLiqH and (showLiqA or not lh2)
-        lb_2 := f_liq(1795273502049, 66384.00, 66445.00, color.rgb(41, 120, 142), 75)
+        lb_0 := f_liq(1795277101488, 67806.00, 67867.00, color.rgb(41, 120, 142), 75)
+    if showLiqH and (showLiqA or not lh1)
+        lb_1 := f_liq(1795277101488, 67319.00, 67380.00, color.rgb(41, 120, 142), 75)
+    if showLiqV and (showLiqA or not lh2)
+        lb_2 := f_liqv(1795334663000, 66959.80, 67040.20, color.rgb(68, 190, 112))
     if showLiqH and (showLiqA or not lh3)
-        lb_3 := f_liq(1795273502049, 65957.00, 66018.00, color.rgb(41, 120, 142), 75)
+        lb_3 := f_liq(1795277101488, 66405.00, 66466.00, color.rgb(68, 190, 112), 65)
     if showLiqH and (showLiqA or not lh4)
-        lb_4 := f_liq(1795273502049, 64799.00, 64921.00, color.rgb(41, 120, 142), 75)
+        lb_4 := f_liq(1795277101488, 65918.00, 66040.00, color.rgb(41, 120, 142), 75)
     if showLiqH and (showLiqA or not lh5)
-        lb_5 := f_liq(1795273502049, 64433.00, 64677.00, color.rgb(68, 190, 112), 65)
+        lb_5 := f_liq(1795277101488, 65369.00, 65430.00, color.rgb(41, 120, 142), 75)
     if showLiqH and (showLiqA or not lh6)
-        lb_6 := f_liq(1795273502049, 63580.00, 64189.00, color.rgb(253, 231, 37), 45)
-    if showLiqV and (showLiqA or not lh7)
-        lb_7 := f_liqv(1795334663000, 63761.72, 63838.28, color.rgb(68, 190, 112))
+        lb_6 := f_liq(1795277101488, 64821.00, 64943.00, color.rgb(41, 120, 142), 75)
+    if showLiqH and (showLiqA or not lh7)
+        lb_7 := f_liq(1795277101488, 64334.00, 64699.00, color.rgb(68, 190, 112), 65)
     if showLiqH and (showLiqA or not lh8)
-        lb_8 := f_liq(1795273502049, 63336.00, 63458.00, color.rgb(41, 120, 142), 75)
-    if showLiqH and (showLiqA or not lh9)
-        lb_9 := f_liq(1795273502049, 62665.00, 63153.00, color.rgb(253, 231, 37), 45)
+        lb_8 := f_liq(1795277101488, 63359.00, 64212.00, color.rgb(253, 231, 37), 45)
+    if showLiqV and (showLiqA or not lh9)
+        lb_9 := f_liqv(1795334663000, 63761.72, 63838.28, color.rgb(68, 190, 112))
     if showLiqH and (showLiqA or not lh10)
-        lb_10 := f_liqv(1763202600000, 60496.00, 62837.00, color.rgb(253, 231, 37))
-    if showLiqV and (showLiqA or not lh11)
-        lb_11 := f_liqv(1795334663000, 61000.00, 62600.00, color.rgb(253, 231, 37))
-    if showLiqH and (showLiqA or not lh12)
-        lb_12 := f_liqv(1778970630000, 60714.00, 62571.00, color.rgb(253, 231, 37))
+        lb_10 := f_liq(1795277101488, 62628.00, 63237.00, color.rgb(253, 231, 37), 45)
+    if showLiqH and (showLiqA or not lh11)
+        lb_11 := f_liqv(1763202600000, 60496.00, 62837.00, color.rgb(253, 231, 37))
+    if showLiqV and (showLiqA or not lh12)
+        lb_12 := f_liqv(1795334663000, 61000.00, 62600.00, color.rgb(253, 231, 37))
     if showLiqH and (showLiqA or not lh13)
-        lb_13 := f_liq(1795273502049, 62239.00, 62482.00, color.rgb(68, 190, 112), 65)
+        lb_13 := f_liqv(1778970630000, 60714.00, 62571.00, color.rgb(253, 231, 37))
     if showLiqH and (showLiqA or not lh14)
-        lb_14 := f_liq(1795273502049, 61751.00, 61934.00, color.rgb(68, 190, 112), 65)
+        lb_14 := f_liq(1795277101488, 62201.00, 62506.00, color.rgb(253, 231, 37), 45)
     if showLiqH and (showLiqA or not lh15)
-        lb_15 := f_liqv(1763202600000, 59945.00, 60220.00, color.rgb(41, 120, 142))
+        lb_15 := f_liq(1795277101488, 61714.00, 61958.00, color.rgb(68, 190, 112), 65)
     if showLiqH and (showLiqA or not lh16)
-        lb_16 := f_liqv(1778970630000, 59893.00, 60071.00, color.rgb(41, 120, 142))
+        lb_16 := f_liqv(1763202600000, 59945.00, 60220.00, color.rgb(41, 120, 142))
     if showLiqH and (showLiqA or not lh17)
-        lb_17 := f_liq(1795273502049, 59983.00, 60044.00, color.rgb(41, 120, 142), 75)
+        lb_17 := f_liqv(1778970630000, 59893.00, 60071.00, color.rgb(41, 120, 142))
     if showLiqH and (showLiqA or not lh18)
-        lb_18 := f_liq(1795273502049, 58459.00, 58947.00, color.rgb(253, 231, 37), 45)
+        lb_18 := f_liq(1795277101488, 59947.00, 60008.00, color.rgb(41, 120, 142), 75)
     if showLiqH and (showLiqA or not lh19)
-        lb_19 := f_liq(1795273502049, 57911.00, 58276.00, color.rgb(68, 190, 112), 65)
+        lb_19 := f_liq(1795277101488, 58424.00, 58912.00, color.rgb(253, 231, 37), 45)
     if showLiqH and (showLiqA or not lh20)
-        lb_20 := f_liqv(1763202600000, 57328.00, 58099.00, color.rgb(41, 120, 142))
+        lb_20 := f_liq(1795277101488, 57876.00, 58302.00, color.rgb(68, 190, 112), 65)
     if showLiqH and (showLiqA or not lh21)
-        lb_21 := f_liqv(1778970630000, 57786.00, 57964.00, color.rgb(41, 120, 142))
+        lb_21 := f_liqv(1763202600000, 57328.00, 58099.00, color.rgb(41, 120, 142))
     if showLiqH and (showLiqA or not lh22)
-        lb_22 := f_liq(1795273502049, 57545.00, 57728.00, color.rgb(68, 190, 112), 65)
+        lb_22 := f_liqv(1778970630000, 57786.00, 57964.00, color.rgb(41, 120, 142))
     if showLiqH and (showLiqA or not lh23)
-        lb_23 := f_liq(1795273502049, 56935.00, 57118.00, color.rgb(68, 190, 112), 65)
+        lb_23 := f_liq(1795277101488, 57571.00, 57754.00, color.rgb(68, 190, 112), 65)
     if showLiqH and (showLiqA or not lh24)
-        lb_24 := f_liqv(1763202600000, 56915.00, 57025.00, color.rgb(68, 190, 112))
-    if showLiqV and (showLiqA or not lh25)
-        lb_25 := f_liqv(1795334663000, 56965.80, 57034.20, color.rgb(68, 190, 112))
+        lb_24 := f_liq(1795277101488, 56962.00, 57145.00, color.rgb(68, 190, 112), 65)
+    if showLiqH and (showLiqA or not lh25)
+        lb_25 := f_liqv(1763202600000, 56915.00, 57025.00, color.rgb(68, 190, 112))
     if showLiqV and (showLiqA or not lh26)
-        lb_26 := f_liqv(1795334663000, 56865.86, 56934.14, color.rgb(68, 190, 112))
-    if showLiqH and (showLiqA or not lh27)
-        lb_27 := f_liq(1795273502049, 55838.00, 55899.00, color.rgb(41, 120, 142), 75)
+        lb_26 := f_liqv(1795334663000, 56965.80, 57034.20, color.rgb(68, 190, 112))
+    if showLiqV and (showLiqA or not lh27)
+        lb_27 := f_liqv(1795334663000, 56865.86, 56934.14, color.rgb(68, 190, 112))
     if showLiqH and (showLiqA or not lh28)
-        lb_28 := f_liq(1795273502049, 55046.00, 55167.00, color.rgb(41, 120, 142), 75)
+        lb_28 := f_liq(1795277101488, 55866.00, 55926.00, color.rgb(41, 120, 142), 75)
     if showLiqH and (showLiqA or not lh29)
-        lb_29 := f_liq(1795273502049, 54863.00, 54985.00, color.rgb(41, 120, 142), 75)
+        lb_29 := f_liq(1795277101488, 55074.00, 55195.00, color.rgb(68, 190, 112), 65)
     if showLiqH and (showLiqA or not lh30)
-        lb_30 := f_liq(1795273502049, 54497.00, 54558.00, color.rgb(41, 120, 142), 75)
-    if showLiqV and (showLiqA or not lh31)
-        lb_31 := f_liqv(1795334663000, 54100.52, 54165.48, color.rgb(68, 190, 112))
+        lb_30 := f_liq(1795277101488, 54891.00, 55013.00, color.rgb(68, 190, 112), 65)
+    if showLiqH and (showLiqA or not lh31)
+        lb_31 := f_liq(1795277101488, 54464.00, 54586.00, color.rgb(41, 120, 142), 75)
     if showLiqH and (showLiqA or not lh32)
-        lb_32 := f_liq(1795273502049, 53948.00, 54131.00, color.rgb(68, 190, 112), 65)
+        lb_32 := f_liq(1795277101488, 54282.00, 54343.00, color.rgb(41, 120, 142), 75)
     if showLiqH and (showLiqA or not lh33)
-        lb_33 := f_liq(1795273502049, 53704.00, 53765.00, color.rgb(41, 120, 142), 75)
-    if showLiqH and (showLiqA or not lh34)
-        lb_34 := f_liq(1795273502049, 53339.00, 53583.00, color.rgb(41, 120, 142), 75)
-    if showLiqV and (showLiqA or not lh35)
-        lb_35 := f_liqv(1795334663000, 51600.00, 52500.00, color.rgb(68, 190, 112))
+        lb_33 := f_liq(1795277101488, 53977.00, 54160.00, color.rgb(68, 190, 112), 65)
+    if showLiqV and (showLiqA or not lh34)
+        lb_34 := f_liqv(1795334663000, 54100.52, 54165.48, color.rgb(68, 190, 112))
+    if showLiqH and (showLiqA or not lh35)
+        lb_35 := f_liq(1795277101488, 53307.00, 53672.00, color.rgb(68, 190, 112), 65)
     if showLiqH and (showLiqA or not lh36)
-        lb_36 := f_liq(1795273502049, 52363.00, 52424.00, color.rgb(41, 120, 142), 75)
+        lb_36 := f_liq(1795277101488, 52880.00, 52941.00, color.rgb(41, 120, 142), 75)
+    if showLiqV and (showLiqA or not lh37)
+        lb_37 := f_liqv(1795334663000, 51600.00, 52500.00, color.rgb(68, 190, 112))
+    if showLiqH and (showLiqA or not lh38)
+        lb_38 := f_liq(1795277101488, 52393.00, 52454.00, color.rgb(41, 120, 142), 75)
 if barstate.islast
     if lh0 and not showLiqA and not na(lb_0)
         box.delete(lb_0)
@@ -470,10 +480,16 @@ if barstate.islast
     if lh36 and not showLiqA and not na(lb_36)
         box.delete(lb_36)
         lb_36 := na
+    if lh37 and not showLiqA and not na(lb_37)
+        box.delete(lb_37)
+        lb_37 := na
+    if lh38 and not showLiqA and not na(lb_38)
+        box.delete(lb_38)
+        lb_38 := na
 
 var table dash = table.new(dashPos == "oben rechts" ? position.top_right : dashPos == "unten rechts" ? position.bottom_right : dashPos == "oben links" ? position.top_left : position.bottom_left, 5, 8, bgcolor = dashBg, border_width = 0, frame_width = 1, frame_color = color.new(color.gray, 70))
 if barstate.islast and showDash
-    table.cell(dash, 0, 0, "SK 22.11. 16:09", text_color = color.gray, text_size = ts)
+    table.cell(dash, 0, 0, "SK 22.11. 17:09", text_color = color.gray, text_size = ts)
     table.cell(dash, 1, 0, "Zone", text_color = color.gray, text_size = ts)
     table.cell(dash, 2, 0, "TF", text_color = color.gray, text_size = ts)
     table.cell(dash, 3, 0, "SL", text_color = color.gray, text_size = ts)
@@ -492,7 +508,7 @@ if barstate.islast and showDash
         table.cell(dash, 1, r, "60'700–60'792", text_color = color.white, text_size = ts)
         table.cell(dash, 2, r, "15m", text_color = color.gray, text_size = ts)
         table.cell(dash, 3, r, "60'634", text_color = color.gray, text_size = ts)
-        table.cell(dash, 4, r, br0 ? "gebrochen" : f_stat(60699.98, 60792.02), text_color = br0 ? color.gray : color.white, text_size = ts, bgcolor = not br0 and f_in(60699.98, 60792.02) ? color.new(color.teal, 45) : na)
+        table.cell(dash, 4, r, br0 ? "gebrochen" : f_stat(60700.11, 60792.22), text_color = br0 ? color.gray : color.white, text_size = ts, bgcolor = not br0 and f_in(60700.11, 60792.22) ? color.new(color.teal, 45) : na)
         r += 1
     if (showZiel or showDV) and (z15)
         table.cell(dash, 0, r, "DV L", text_color = color.lime, text_size = ts, text_halign = text.align_left)
@@ -503,17 +519,17 @@ if barstate.islast and showDash
         r += 1
     if showLiqH or showLiqV
         table.cell(dash, 0, r, "Liq ★ ↑", text_color = color.rgb(253, 231, 37), text_size = ts, text_halign = text.align_left)
-        table.cell(dash, 1, r, "62'665–63'153", text_color = color.white, text_size = ts)
+        table.cell(dash, 1, r, "62'201–62'506", text_color = color.white, text_size = ts)
         table.cell(dash, 2, r, "HM+Mo ✓", text_color = color.gray, text_size = ts)
         table.cell(dash, 3, r, "", text_color = color.gray, text_size = ts)
-        table.cell(dash, 4, r, lh9 ? "abgeholt" : f_stat(62665.00, 63153.00), text_color = lh9 ? color.gray : color.white, text_size = ts, bgcolor = not lh9 and f_in(62665.00, 63153.00) ? color.new(color.rgb(253, 231, 37), 45) : na)
+        table.cell(dash, 4, r, lh14 ? "abgeholt" : f_stat(62201.00, 62506.00), text_color = lh14 ? color.gray : color.white, text_size = ts, bgcolor = not lh14 and f_in(62201.00, 62506.00) ? color.new(color.rgb(253, 231, 37), 45) : na)
         r += 1
     if showLiqH
         table.cell(dash, 0, r, "Liq ★ ↓", text_color = color.rgb(253, 231, 37), text_size = ts, text_halign = text.align_left)
-        table.cell(dash, 1, r, "58'459–58'947", text_color = color.white, text_size = ts)
+        table.cell(dash, 1, r, "58'424–58'912", text_color = color.white, text_size = ts)
         table.cell(dash, 2, r, "HM MOD", text_color = color.gray, text_size = ts)
         table.cell(dash, 3, r, "", text_color = color.gray, text_size = ts)
-        table.cell(dash, 4, r, lh18 ? "abgeholt" : f_stat(58459.00, 58947.00), text_color = lh18 ? color.gray : color.white, text_size = ts, bgcolor = not lh18 and f_in(58459.00, 58947.00) ? color.new(color.rgb(253, 231, 37), 45) : na)
+        table.cell(dash, 4, r, lh19 ? "abgeholt" : f_stat(58424.00, 58912.00), text_color = lh19 ? color.gray : color.white, text_size = ts, bgcolor = not lh19 and f_in(58424.00, 58912.00) ? color.new(color.rgb(253, 231, 37), 45) : na)
         r += 1
     if dashFib
         table.cell(dash, 0, r, "Fib S", text_color = color.gray, text_size = ts, text_halign = text.align_left)
